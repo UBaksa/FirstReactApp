@@ -1,0 +1,10 @@
+.welcome {
+  border-radius: 1rem;
+  width: 75vh;
+  height: 35vh;
+  background-color: blue;
+  margin: auto;
+  margin-top: 2rem;
+  text-align: center;
+  padding: 1rem;
+}
