@@ -1,0 +1,38 @@
+.card {
+  margin-top: 2rem;
+  text-align: center;
+  width: 20%;
+  height: 25 rem;
+  border-radius: 1rem;
+  background-color: gainsboro;
+}
+
+#ime {
+  font-size: 1.5rem;
+  text-align: center;
+  color: gray;
+}
+.img {
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
+}
+.img img {
+  margin-top: 1rem;
+  object-fit: cover;
+  border-radius: 50%;
+  height: 70%;
+  width: 70%;
+}
+.card p {
+  padding: 0.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.card h2 {
+  margin-bottom: 0.2rem;
+  font-size: 1.3rem;
+}
+.card a {
+  color: black;
+  cursor: pointer;
+}
