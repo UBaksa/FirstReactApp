@@ -13,10 +13,15 @@ function App() {
         personName={"Bakir"}
         Lastname={"Ujkanovic"}
         imageLink={"https://i.ytimg.com/vi/Ux5cQbO_ybw/maxresdefault.jpg"}
-        state={"Serba"}
+        state={"Serbia"}
         city={"Novi Pazar"}
         years={"19"}
         github={"https://github.com/UBaksa"}
+        linked={"https://rs.linkedin.com/"}
+        facebook={"https://sr-rs.facebook.com/"}
+        projectNumber={"5"}
+        reps={"120"}
+        unreps={"0"}
       ></PersonCard>
     </div>
     // <>- ovo je react fragment,kojim moze da se sve wrappuje!
