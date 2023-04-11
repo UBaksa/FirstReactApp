@@ -10,6 +10,7 @@
   height: 25 rem;
   border-radius: 1rem;
   background-color: gainsboro;
+  box-shadow: 3px 3px 3px black;
 }
 
 #ime {
@@ -64,4 +65,9 @@
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
   border: solid 1px white;
+}
+.card:hover {
+  transition: 1s ease-in-out;
+  transform: scale(1.05);
+  cursor: default;
 }
