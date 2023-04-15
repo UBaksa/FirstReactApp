@@ -4,11 +4,57 @@ import Greeting from "./components/Greetings/Greeting.js";
 import { Navbar } from "./components/Navbar/Navbar";
 import { PersonCard } from "./components/PersonCard/PersonCard";
 import hotels from "./components/Common/hotels.json";
+import teams from "./components/Common/teams.json";
 import HotelCard from "./components/HotelCard/HotelCard";
+import Form from "./components/Form/Form";
 
 function App() {
-  const [name, setName] = useState("");
-  console.log(name);
+  const poruke = [
+    "Danas je subota ",
+    "U subotu je lepo vreme",
+    "Subota je dan za odmor",
+    "Subota je dan za kupovinu",
+    "Subota je dan za druzenje",
+    "Subota je dan za kafu",
+  ];
+  const teams = [
+    {
+      id: 1,
+      name: "Arsenal",
+      poeni: 73,
+      matches: 30,
+    },
+    {
+      id: 2,
+      name: "Manchester City",
+      poeni: 63,
+      matches: 30,
+    },
+    {
+      id: 3,
+      name: "Newcastle",
+      poeni: 56,
+      matches: 30,
+    },
+    {
+      id: 4,
+      name: "Liverpool",
+      poeni: 44,
+      matches: 30,
+    },
+    {
+      id: 5,
+      name: "Manchester United",
+      poeni: 43,
+      matches: 30,
+    },
+  ];
+  const [userInput, setUserInput] = useState({
+    name: "",
+    Lastname: "",
+    email: "",
+    phone: "",
+  });
   return (
     <div className="App">
       <Navbar></Navbar>
@@ -39,34 +85,7 @@ function App() {
           />
         ))}
       </div>
-      <form
-        onSubmit={function (event) {
-          event.preventDefault();
-        }}
-      >
-        <label htmlFor="firstName">Unesite Vase ime </label>
-        <input
-          type="text"
-          id="firstName"
-          name=""
-          // innerText={"ime"}---------------------> alternativa
-          value={"ime"}
-          onChange={function (event) {
-            setName(event.target.value);
-          }}
-        ></input>
-        <br></br>
-        <label htmlFor="lastName">Unesite Vase prezime </label>
-        <input type="text" id="lastName" name="lastName" required></input>
-        <br></br>
-        <label htmlFor="mail">Unesite Vasu email adresu </label>
-        <input type="mail" id="mail" name="mail" required></input>
-        <br></br>
-        <label htmlFor="phone">Unesite Vas broj telefona </label>
-        <input type="tel" id="phone" name="telnumber" required></input>
-        <br></br>
-        <button type="submit">Potvrdi</button>
-      </form>
+      <Form></Form>
     </div>
     // <>- ovo je react fragment,kojim moze da se sve wrappuje!
   );
