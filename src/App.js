@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Greeting from "./components/Greetings/Greeting.js";
 import { Navbar } from "./components/Navbar/Navbar";
 import { PersonCard } from "./components/PersonCard/PersonCard";
 import hotels from "./components/Common/hotels.json";
-import teams from "./components/Common/teams.json";
+import teamsJSON from "./components/Common/teams.json";
 import HotelCard from "./components/HotelCard/HotelCard";
 import Form from "./components/Form/Form";
 import TeamCard from "./components/TeamCard/TeamCard";
+
+export const BASE_URL = "https://api.quotable.io/";
 
 function App() {
   const poruke = [
@@ -24,44 +26,68 @@ function App() {
     const reversed = _arr.reverse();
     setArr(reversed);
   };
-  const teams = [
-    {
-      id: 1,
-      name: "Arsenal",
-      poeni: 73,
-      matches: 30,
-    },
-    {
-      id: 2,
-      name: "Manchester City",
-      poeni: 63,
-      matches: 30,
-    },
-    {
-      id: 3,
-      name: "Newcastle",
-      poeni: 56,
-      matches: 30,
-    },
-    {
-      id: 4,
-      name: "Liverpool",
-      poeni: 44,
-      matches: 30,
-    },
-    {
-      id: 5,
-      name: "Manchester United",
-      poeni: 43,
-      matches: 30,
-    },
-  ];
+  // const teams = [
+  //   {
+  //     id: 1,
+  //     name: "Arsenal",
+  //     poeni: 73,
+  //     matches: 30,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Manchester City",
+  //     poeni: 63,
+  //     matches: 30,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Newcastle",
+  //     poeni: 56,
+  //     matches: 30,
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Liverpool",
+  //     poeni: 44,
+  //     matches: 30,
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Manchester United",
+  //     poeni: 43,
+  //     matches: 30,
+  //   },
+  // ];
   const [userInput, setUserInput] = useState({
     name: "",
     Lastname: "",
     email: "",
     phone: "",
   });
+
+  const [teams, setTeams] = useState(teamsJSON);
+  console.log(teams);
+
+  // Brisanje tima:
+  const deleteTeam = (id) => {
+    const filtered = teams.filter((team) => team.id !== id);
+    setTeams(filtered);
+  };
+
+  const getQuotes = async () => {
+    const quotes = await fetch(`${BASE_URL}/quotes?page=${page}`);
+    const data = await quotes.json();
+    const results = data.results;
+
+    setQuots(results);
+    console.log(data);
+    console.log(results);
+  };
+  const [quotes, setQuots] = useState([]);
+  const [page, setPage] = useState(1);
+  useEffect(() => {
+    getQuotes();
+  }, [page]); //prazan niz ucitava kad se tek ucita aplikacija,da tad pokupi podatke.koristi se najcesce zbog usporavanja aplikacije
   return (
     <div className="App">
       <Navbar></Navbar>
@@ -115,10 +141,15 @@ function App() {
           <p>{poruka}</p>
         ))}
       </div>
-      <TeamCard />
-      <TeamCard />
-      <TeamCard />
-      <TeamCard />
+      {teams.map((team) => (
+        <TeamCard
+          key={team.id}
+          name={team.name}
+          matches={team.matches}
+          poeni={team.poeni}
+          deleteTeam={() => deleteTeam(team.id)}
+        ></TeamCard>
+      ))}
     </div>
     // <>- ovo je react fragment,kojim moze da se sve wrappuje!
   );

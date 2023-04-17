@@ -41,6 +41,7 @@ export default function HotelCard(props) {
             style={{
               background:
                 rating < 7 ? "orange" : rating < 9 ? "yellow" : "green",
+              width: "8.3rem",
             }}
           >
             {stars(props.stars)}
