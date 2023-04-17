@@ -7,6 +7,7 @@ import hotels from "./components/Common/hotels.json";
 import teams from "./components/Common/teams.json";
 import HotelCard from "./components/HotelCard/HotelCard";
 import Form from "./components/Form/Form";
+import TeamCard from "./components/TeamCard/TeamCard";
 
 function App() {
   const poruke = [
@@ -17,6 +18,12 @@ function App() {
     "Subota je dan za druzenje",
     "Subota je dan za kafu",
   ];
+  const [arr, setArr] = useState(poruke);
+  const reverseArr = () => {
+    const _arr = [...arr];
+    const reversed = _arr.reverse();
+    setArr(reversed);
+  };
   const teams = [
     {
       id: 1,
@@ -86,6 +93,32 @@ function App() {
         ))}
       </div>
       <Form></Form>
+      <div
+        style={{
+          height: "200px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "10px",
+        }}
+      >
+        <button
+          onClick={() => {
+            reverseArr();
+            console.log("okrenuo se niz");
+          }}
+        >
+          Promeni raspored poruka
+        </button>
+        {arr.map((poruka) => (
+          <p>{poruka}</p>
+        ))}
+      </div>
+      <TeamCard />
+      <TeamCard />
+      <TeamCard />
+      <TeamCard />
     </div>
     // <>- ovo je react fragment,kojim moze da se sve wrappuje!
   );
