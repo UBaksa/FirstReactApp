@@ -1,158 +1,157 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./App.css";
-import Greeting from "./components/Greetings/Greeting.js";
 import { Navbar } from "./components/Navbar/Navbar";
-import { PersonCard } from "./components/PersonCard/PersonCard";
-import hotels from "./components/Common/hotels.json";
-import teamsJSON from "./components/Common/teams.json";
-import HotelCard from "./components/HotelCard/HotelCard";
 import Form from "./components/Form/Form";
-import TeamCard from "./components/TeamCard/TeamCard";
+import { Route, Routes } from "react-router-dom";
+import AboutUs from "./pages/AboutUs/AboutUs";
+import Hotels from "./pages/Hotels/Hotels";
+import Teams from "./pages/Teams/Teams";
+import Quotes from "./pages/Quotes/Quotes";
+import Hotel from "./pages/hotel/Hotel";
+import { Register } from "./pages/Register/Register";
+import { Login } from "./pages/Login/Login";
+import { AppContext } from "./context/AppContext";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
-export const BASE_URL = "https://api.quotable.io/";
+// const poruke = [
+//   "Danas je subota",
+//   "U subotu je lepo vreme",
+//   "Subota je dan za odmor",
+//   "Subota je dan za kupovinu",
+//   "Subota je dan za druzenje",
+//   "Subota je dan za kafu",
+// ];
+
+export const BASE_URL = "https://api.quotable.io";
 
 function App() {
-  const poruke = [
-    "Danas je subota ",
-    "U subotu je lepo vreme",
-    "Subota je dan za odmor",
-    "Subota je dan za kupovinu",
-    "Subota je dan za druzenje",
-    "Subota je dan za kafu",
-  ];
-  const [arr, setArr] = useState(poruke);
-  const reverseArr = () => {
-    const _arr = [...arr];
-    const reversed = _arr.reverse();
-    setArr(reversed);
+  // const [count, setCount] = React.useState(0);
+  const [count, setCount] = useState(0);
+  // const [arr, setArr] = useState(poruke);
+  // setCount je metoda pomocu koje menjamo vrednost count state_a:
+  const increaseCount = () => {
+    setCount(count + 1);
   };
-  // const teams = [
-  //   {
-  //     id: 1,
-  //     name: "Arsenal",
-  //     poeni: 73,
-  //     matches: 30,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Manchester City",
-  //     poeni: 63,
-  //     matches: 30,
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Newcastle",
-  //     poeni: 56,
-  //     matches: 30,
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Liverpool",
-  //     poeni: 44,
-  //     matches: 30,
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Manchester United",
-  //     poeni: 43,
-  //     matches: 30,
-  //   },
-  // ];
-  const [userInput, setUserInput] = useState({
-    name: "",
-    Lastname: "",
-    email: "",
-    phone: "",
-  });
-
-  const [teams, setTeams] = useState(teamsJSON);
-  console.log(teams);
-
-  // Brisanje tima:
-  const deleteTeam = (id) => {
-    const filtered = teams.filter((team) => team.id !== id);
-    setTeams(filtered);
+  const decreaseCount = () => {
+    setCount(count - 1);
   };
+  // const x = 10;
 
-  const getQuotes = async () => {
-    const quotes = await fetch(`${BASE_URL}/quotes?page=${page}`);
-    const data = await quotes.json();
-    const results = data.results;
+  // const reverseArr = () => {
+  //   const _arr = [...arr];
+  //   const reversed = _arr.reverse();
+  //   setArr(reversed);
+  // };
 
-    setQuots(results);
-    console.log(data);
-    console.log(results);
-  };
-  const [quotes, setQuots] = useState([]);
-  const [page, setPage] = useState(1);
+  const { token, setToken } = useContext(AppContext);
   useEffect(() => {
-    getQuotes();
-  }, [page]); //prazan niz ucitava kad se tek ucita aplikacija,da tad pokupi podatke.koristi se najcesce zbog usporavanja aplikacije
+    const localToken = localStorage.getItem("token");
+    setToken(localToken);
+  }, []);
+
   return (
-    <div className="App">
-      <Navbar></Navbar>
-      <Greeting appName={"Our First App"} username={"Bakir Ujkanovic"} />
-      <PersonCard
-        personName={"Bakir"}
-        Lastname={"Ujkanovic"}
-        imageLink={"https://i.ytimg.com/vi/Ux5cQbO_ybw/maxresdefault.jpg"}
-        state={"Serbia"}
-        city={"Novi Pazar"}
-        years={"19"}
-        github={"https://github.com/UBaksa"}
-        linked={"https://rs.linkedin.com/"}
-        facebook={"https://sr-rs.facebook.com/"}
-        projectNumber={"5"}
-        reps={"120"}
-        unreps={"0"}
-      ></PersonCard>
-      <div className="hotels">
-        {hotels.map((hotel) => (
-          <HotelCard
-            imageURL={hotel.imageURL}
-            name={hotel.name}
-            stars={hotel.stars}
-            description={hotel.description}
-            rating={hotel.rating}
-            reviews={hotel.reviews}
-          />
-        ))}
-      </div>
-      <Form></Form>
-      <div
-        style={{
-          height: "200px",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "10px",
-        }}
-      >
-        <button
-          onClick={() => {
-            reverseArr();
-            console.log("okrenuo se niz");
+    //  React.createElement("p", {}, "Neki paragraf");
+    <>
+      {" "}
+      {/* Fragment - najcesce se koristi za wrappovanje */}
+      {/* <div className="App"> */}
+      {/* <Navbar><p>Samo za primer</p></Navbar>
+        <Greeting appName={"Our First App"} username={"Bakir Ujkanovic"} /> */}
+      {/* <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 250px)",
+            justifyContent: "center",
+            gridAutoRows: "minmax(420px, auto)",
+            gridGap: "40px",
+          }}
+        > */}
+      {/* <div>
+            <button style={{ width: "40px" }} onClick={decreaseCount}>
+              -
+            </button>
+            <p>{count}</p>
+            <button
+              style={{ width: "40px" }}
+              onClick={() => {
+                console.log("povecanje");
+                setCount(count + 1);
+              }}
+            >
+              +
+            </button>
+          </div> */}
+      {/* </div> */}
+      {/* <div
+          style={{
+            height: "200px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px",
           }}
         >
-          Promeni raspored poruka
-        </button>
-        {arr.map((poruka) => (
-          <p>{poruka}</p>
-        ))}
-      </div>
-      {teams.map((team) => (
-        <TeamCard
-          key={team.id}
-          name={team.name}
-          matches={team.matches}
-          poeni={team.poeni}
-          deleteTeam={() => deleteTeam(team.id)}
-        ></TeamCard>
-      ))}
-    </div>
-    // <>- ovo je react fragment,kojim moze da se sve wrappuje!
+          <button
+            onClick={() => {
+              reverseArr();
+              console.log("okrenuo se niz");
+            }}
+          >
+            Promeni raspored poruka
+          </button>
+          {arr.map((poruka) => (
+            <p>{poruka}</p>
+          ))}
+        </div> */}
+      <Navbar />
+      <Routes>
+        <Route path="/" element={token ? <Hotels /> : <Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/about-us"
+          element={
+            <ProtectedRoute>
+              <AboutUs />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/hotels"
+          element={
+            <ProtectedRoute>
+              <Hotels />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teams"
+          element={
+            <ProtectedRoute>
+              <Teams />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/quotes"
+          element={
+            <ProtectedRoute>
+              <Quotes />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/hotels/:id"
+          element={
+            <ProtectedRoute>
+              <Hotel />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </>
   );
 }
-// ako zelimo npr da ubacimo ovaj navbar u app js i izmedju <Navbar></Navbar>,u navbar funckiji ubacimo argument props,i ubacimo dole posle {props.childer}
+
 export default App;
