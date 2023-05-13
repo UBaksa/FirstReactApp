@@ -1,77 +1,119 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import "./Form.css";
+
 function Form() {
-  const poruke = [
-    "Danas je subota ",
-    "U subotu je lepo vreme",
-    "Subota je dan za odmor",
-    "Subota je dan za kupovinu",
-    "Subota je dan za druzenje",
-    "Subota je dan za kafu",
-  ];
+  // 1. nacin - za svako input polje poseban state
+  // const [name, setName] = useState("");
+  // const [lastName, setLastName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [hobby, setHobby] = useState("");
+  // const [phone, setPhone] = useState("+381");
+
+  // 2. jedan state za sva input polja
   const [userInput, setUserInput] = useState({
     name: "",
-    Lastname: "",
+    lastName: "",
     email: "",
+    hobby: "",
     phone: "",
   });
   return (
-    <div className="forma">
+    <div className="formContainer">
       <form
-        onSubmit={function (event) {
+        onSubmit={(event) => {
           event.preventDefault();
+          // console.log({ name });
+          // console.log("lastName", lastName);
+          // console.log({ email });
+          // console.log({ hobby });
+          // console.log({ phone });
           console.log({ userInput });
         }}
       >
-        <label htmlFor="firstName">Unesite Vase ime </label>
+        <label htmlFor="firstName">Unesite vase ime</label>
         <input
           type="text"
           id="firstName"
-          name=""
-          // innerText={"ime"}---------------------> alternativa
+          name="firstName"
+          required
+          // innerText={"ime"}
           value={userInput.name}
-          onChange={function (event) {
-            setUserInput((prev) => ({ ...prev, name: event.target.value }));
-          }}
-        ></input>
-        <br></br>
-        <label htmlFor="lastName">Unesite Vase prezime </label>
-        <input
-          value={userInput.Lastname}
           onChange={(event) => {
-            setUserInput((prev) => ({ ...prev, Lastname: event.target.value }));
+            setUserInput((prev) => ({
+              ...prev,
+              name: event.target.value,
+            }));
           }}
+        />
+        <br />
+        <br />
+
+        <label htmlFor="lastName">Unesite vase prezime</label>
+        <input
           type="text"
           id="lastName"
           name="lastName"
           required
-        ></input>
-        <br></br>
-        <label htmlFor="mail">Unesite Vasu email adresu </label>
+          value={userInput.lastName}
+          onChange={(event) => {
+            setUserInput((prev) => ({
+              ...prev,
+              lastName: event.target.value,
+            }));
+          }}
+        />
+        <br />
+        <br />
+
+        <label htmlFor="email">Unesite vasu email adresu</label>
         <input
+          type="email"
+          id="email"
+          name="email"
+          required
           value={userInput.email}
           onChange={(event) => {
-            setUserInput((prev) => ({ ...prev, email: event.target.value }));
+            setUserInput((prev) => ({
+              ...prev,
+              email: event.target.value,
+            }));
           }}
-          type="mail"
-          id="mail"
-          name="mail"
-          required
-        ></input>
-        <br></br>
-        <label htmlFor="phone">Unesite Vas broj telefona </label>
+        />
+        <br />
+        <br />
+
+        <label htmlFor="hobi">Unesite vas hobi</label>
         <input
-          value={userInput.phone}
+          type="text"
+          id="hobi"
+          name="hobi"
+          value={userInput.hobby}
           onChange={(event) => {
-            setUserInput((prev) => ({ ...prev, phone: event.target.value }));
+            setUserInput((prev) => ({
+              ...prev,
+              hobby: event.target.value,
+            }));
           }}
+        />
+        <br />
+        <br />
+
+        <label htmlFor="phone">Unesite vas broj telefona</label>
+        <input
           type="tel"
           id="phone"
-          name="telnumber"
-          required
-        ></input>
-        <br></br>
+          name="phone"
+          value={userInput.phone}
+          onChange={(event) => {
+            setUserInput((prev) => ({
+              ...prev,
+              phone: event.target.value,
+            }));
+          }}
+        />
+        <br />
+        <br />
+
         <button type="submit">Potvrdi</button>
       </form>
     </div>

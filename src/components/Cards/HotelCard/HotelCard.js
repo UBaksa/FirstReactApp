@@ -15,6 +15,12 @@ export default function HotelCard(props) {
     return arr;
   };
 
+  // 5-6 => "Decent"
+  // 6-7 => ""
+  // 7-8 => "Good"
+  // 8-9 => "Very Good"
+  // 9-10 => "Wonderful"
+
   const slashIndex = props.rating.indexOf("/");
   const rating = +props.rating.slice(0, slashIndex);
   let reaction;
@@ -41,7 +47,6 @@ export default function HotelCard(props) {
             style={{
               background:
                 rating < 7 ? "orange" : rating < 9 ? "yellow" : "green",
-              width: "8.3rem",
             }}
           >
             {stars(props.stars)}
@@ -55,13 +60,7 @@ export default function HotelCard(props) {
           {/* 1. nacin uslovnog prikazivanja (Conditional rendering) */}
           {/* {showRecomendation && <p>Recomendation</p>} */}
           {/* 2. nacin uslovnog prikazivanja (Conditional rendering) */}
-          {showRecomendation ? (
-            <p>
-              <b>Recomendation</b>
-            </p>
-          ) : (
-            <></>
-          )}
+          {showRecomendation ? <p>Recomendation</p> : <></>}
         </div>
       </div>
     </div>
