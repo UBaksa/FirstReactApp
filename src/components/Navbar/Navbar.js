@@ -3,6 +3,7 @@ import "./Navbar.css";
 import { NavLink } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
 import { useNavigate } from "react-router-dom";
+import { FaReact } from "react-icons/fa";
 
 function Navbar(props) {
   const { token, setToken } = useContext(AppContext);
@@ -32,7 +33,10 @@ function Navbar(props) {
             style={({ isActive }) => (isActive ? acitveStyles : styles)}
             className="logo"
           >
-            <h1 style={{ fontFamily: "Arial" }}>Logo</h1>
+            <h1 style={{ fontFamily: "Arial" }}>
+              <FaReact />
+              React App
+            </h1>
           </NavLink>
           <NavLink
             to={"/about-us"}
@@ -84,7 +88,10 @@ function Navbar(props) {
             style={({ isActive }) => (isActive ? acitveStyles : styles)}
             className="logo"
           >
-            <h1 style={{ fontFamily: "Arial" }}>Logo</h1>
+            <h1 style={{ fontFamily: "Arial" }}>
+              <FaReact />
+              React App
+            </h1>
           </NavLink>
           <NavLink
             to={"/login"}
