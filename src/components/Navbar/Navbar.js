@@ -8,16 +8,16 @@ function Navbar(props) {
   const { token, setToken } = useContext(AppContext);
   const navigation = useNavigate();
   const acitveStyles = {
-    backgroundColor: "lightblue",
+    backgroundColor: "blue",
     padding: "7px",
     borderRadius: "10px",
-    color: "darkblue",
+    color: "orange",
     textDecoration: "none",
     margin: "20px",
   };
   const styles = {
     textDecoration: "none",
-    color: "#fefefe",
+    color: "orange",
     margin: "20px",
   };
 
@@ -90,13 +90,13 @@ function Navbar(props) {
             to={"/login"}
             style={({ isActive }) => (isActive ? acitveStyles : styles)}
           >
-            <h1 style={{ fontFamily: "Arial" }}>Login</h1>
+            <h1 style={{ fontFamily: "Arial" }}>Prijava</h1>
           </NavLink>
           <NavLink
             to={"/register"}
             style={({ isActive }) => (isActive ? acitveStyles : styles)}
           >
-            <h1 style={{ fontFamily: "Arial" }}>Register</h1>
+            <h1 style={{ fontFamily: "Arial" }}>Registracija</h1>
           </NavLink>
         </>
       )}
